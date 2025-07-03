@@ -1,0 +1,95 @@
+cursor.execute("""
+CREATE TABLE IF NOT EXISTS reply_chain (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    trader_id BIGINT NOT NULL,
+    message_id BIGINT NOT NULL,
+    order_message_id BIGINT NOT NULL,
+    order_amount INTEGER NOT NULL
+);
+""")
+
+
+CREATE TABLE IF NOT EXISTS order_history (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    trader_id BIGINT NOT NULL,
+    date DATETIME DEFAULT CURRENT_TIMESTAMP,
+    trade_type BOOLEAN NOT NULL,
+    order_amount INTEGER NOT NULL,
+    entry_price INTEGER NOT NULL,
+    stop_price INTEGER NOT NULL,
+    leverage INTEGER NOT NULL
+);
+
+
+CREATE TABLE IF NOT EXISTS orders (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    trader_id BIGINT NOT NULL,
+    message_id BIGINT NOT NULL,
+    trade_type BOOLEAN NOT NULL,
+    date DATETIME DEFAULT CURRENT_TIMESTAMP,
+    order_price INTEGER NOT NULL,
+    take_profit INTEGER NULL,
+    stop_loss INTEGER NULL,
+    leverage INTEGER NOT NULL,
+    expiration_order_time DATETIME NOT NULL,
+    expiration_date DATETIME NOT NULL,
+    order_amount INTEGER NOT NULL,
+    volume_filled INTEGER NOT NULL
+);
+
+
+
+CREATE TABLE IF NOT EXISTS positions (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    seller_id BIGINT NOT NULL,
+    buyer_id BIGINT NOT NULL,
+    position_amount INTEGER NOT NULL,
+    open_price INTEGER NOT NULL,
+    leverage INTEGER NOT NULL,
+    stop_loss INTEGER NULL,
+    take_profit INTEGER NULL,
+    stop_price INTEGER NULL,
+    expiration_date DATETIME NOT NULL
+);
+
+
+
+CREATE TABLE IF NOT EXISTS users (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    trader_id BIGINT NOT NULL,
+    username TEXT NULL,
+    register_date DATE DEFAULT CURRENT_TIMESTAMP,
+    margin FLOAT NULL,
+    access_level INTEGER NOT NULL DEFAULT 1,
+    referral_code TEXT NOT NULL,
+    parent_id INTEGER NULL,
+    children INTEGER NULL
+);
+
+
+
+
+1- increment frozen_pack after setting order -> frozen pack  ------ checked
+3- check type errors for tables and classes  ----- checked
+4- check trade_pack availability -> position_amount + order_remained or trade_pack - frozen_pack  ------ checked
+
+
+5- define canceling orders
+2- decrement frozen_pack after canceling order -> frozen pack
+6- check for stop loss and take profit match in leverage 2
+7- determine the order price
+
+
+text can be updated:
+    position message
+    bot error messages
+    group rules
+    12:30 message
+    22:00 message
+
+
+vars can be updated:
+    commission
+    trade pack value
+    cards info
+

@@ -1,0 +1,5 @@
+python-telegram-bot~=22.1
+requests~=2.32.3
+beautifulsoup4~=4.13.4
+aiomysql~=0.2.0
+prettytable~=3.16.0
