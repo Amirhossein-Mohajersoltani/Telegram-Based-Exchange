@@ -3,16 +3,17 @@ import bots.panel_bot as panel_bot
 import bots.control_updates as control_updates
 import asyncio
 from common.database import DataBase
+from common.config import *
 
 
 async def main():
     # 1. ساخت Connection Pool
     db = await DataBase.create_pool(
-        host="188.34.178.143",
-        user="amirhossein",
-        password="g9x76Z!8W]Co1",
-        db="modem",
-        port=3306,
+        host=DB_HOST,
+        user=DB_USER,
+        password=DB_PASSWORD,
+        db=DB_NAME,
+        port=DB_PORT,
         minsize=1,
         maxsize=10
     )

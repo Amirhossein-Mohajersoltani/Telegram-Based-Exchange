@@ -1,13 +1,20 @@
 # config.py
+from dotenv import load_dotenv
 import os
 
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-DB_PATH = os.path.join(BASE_DIR, "storage", "exchange.db")
+load_dotenv()
+
+DB_HOST = os.getenv("DB_HOST")          # string
+DB_USER = os.getenv("DB_USER")          # string
+DB_PASSWORD = os.getenv("DB_PASSWORD")  # string
+DB_NAME = os.getenv("DB_NAME")          # string
+
+DB_PORT = int(os.getenv("DB_PORT", 3306))  # int
 
 
 
-PANEL_BOT_TOKEN = '7768320634:AAG8pOF5DnbaIwz3ESAaywp6hMzf8YVbK0k'
-GROUP_BOT_TOKEN = "8147477090:AAESQmD3bvXeGrHLK2_cLQdyHYTLNJ59Pbw"
+PANEL_BOT_TOKEN = os.getenv("PANEL_BOT_TOKEN")
+GROUP_BOT_TOKEN = os.getenv('GROUP_BOT_TOKEN')
 
 
 # Payment info
